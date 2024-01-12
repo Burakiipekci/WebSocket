@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Örneği</title>
+</head>
+<body>
+    <div id="messages"></div>
+
+    <script>
+        const socket = new WebSocket('wss://localhost:6969/ws');
+
+        socket.addEventListener('open', (event) => {
+            console.log('Bağlanti kuruldu:', event);
+        });
+
+        socket.addEventListener('message', (event) => {
+            const messagesContainer = document.getElementById('messages');
+            messagesContainer.innerHTML += `<p>${event.data}</p>`;
+        });
+
+        socket.addEventListener('close', (event) => {
+            console.log('bağlanti kapandı:', event);
+        });
+
+        socket.addEventListener('error', (event) => {
+            console.error('WebSocket hatasi:', event);
+        });
+
+    </script>
+</body>
+</html>
